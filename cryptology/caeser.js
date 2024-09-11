@@ -51,18 +51,41 @@ function caesarEncrypt(message, key){
 
 // caesarDecrypt function 
 function caesarDecrypt(message, key){
+    var decryptedResult = "";
     
-    /************************************************************************
-    * Write a function below that returns the decrypted message
-    * Hint -- copy code from the caesarEncrypt method above!
-    * Decrypting is the same process as encrypting,
-    * the key just needs to shift the letters back instead of forward!
-     ************************************************************************/
-
-
-
-
-
+    // Goes through the message to decrypt one letter at a time
+    for(var i = 0; i < message.length; i++){
+        var originalCharacter = message.charAt(i);
+        
+        // Finds where each letter is in the ALPHABET
+        var alphabeticIndex = ALPHABET.indexOf(originalCharacter);
+        
+        // As long as it exists in the ALPHABET...
+        if(alphabeticIndex >= 0){
+            
+            // Shifts the letter to the LEFT according to the key.
+            
+            // Advanced: It also adds the length of the alphabet (26)
+            // and divides by the length to account for wrapping around to the 
+            // beginning when needed
+            var newIndex = alphabeticIndex - key + ALPHABET.length;
+            newIndex = newIndex % ALPHABET.length;
+            
+            // Get the new letter
+            var newCharacter = ALPHABET.charAt(newIndex);
+            
+            // Add the new shifted letter to the decrypted result
+            decryptedResult += newCharacter
+        }
+        
+        // If it's not in the ALPHABET (like punctuation), keep the original 
+        // character
+        else{
+            decryptedResult += originalCharacter;
+        }
+    }
+    
+    return decryptedResult;
 }
 
 // Run Program
