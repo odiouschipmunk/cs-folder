@@ -1,5 +1,5 @@
 #VigenereCipher.py
-import CaesarCipher
+#import CaesarCipher
 
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
