@@ -1,26 +1,11 @@
-import string
+def encrypt(message, key):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    key_map = {alphabet[i]: key[i] for i in range(len(alphabet))}
+    encrypted_result = "".join([key_map[char] if char in key_map else char for char in message])
+    return encrypted_result
 
-def generate_cipher(key):
-    alphabet = string.ascii_uppercase
-    cipher = dict(zip(alphabet, key))
-    return cipher
-
-def encrypt(message, cipher):
-    message = message.upper()
-    encrypted_message = ''.join([cipher.get(letter, letter) for letter in message])
-    return encrypted_message
-
-def decrypt(ciphertext, cipher):
-    reverse_cipher = {v: k for k, v in cipher.items()}
-    decrypted_message = ''.join([reverse_cipher.get(letter, letter) for letter in ciphertext])
-    return decrypted_message
-
-key = "BCDA"  
-cipher = generate_cipher(key)
-
-plaintext = "ABCD"
-ciphertext = encrypt(plaintext, cipher)
-print(f"Encrypted: {ciphertext}")
-
-decrypted = decrypt(ciphertext, cipher)
-print(f"Decrypted: {decrypted}")
+def decrypt(message, key):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    key_map = {key[i]: alphabet[i] for i in range(len(alphabet))}
+    decrypted_result = "".join([key_map[char] if char in key_map else char for char in message])
+    return decrypted_result
