@@ -1,9 +1,21 @@
 import re
 
-def is_english(text):
-    # Simple heuristic: check if the text contains common English words
-    common_words = ["the", "be", "to", "of", "and", "a", "in", "that", "have", "i"]
-    text = text.lower()
-    words = re.findall(r'\b\w+\b', text)
-    matches = sum(1 for word in words if word in common_words)
-    return matches / len(words) > 0.1  # Arbitrary threshold
+# Load the dictionary from the file
+def load_dictionary(file_path):
+    with open(file_path, 'r') as file:
+        words = file.read().split()
+    return set(word.lower() for word in words)
+
+# Check if the text is English based on the dictionary
+def is_english(text, dictionary, threshold=0.5, return_score=False):
+    words = re.findall(r'\b\w+\b', text.lower())
+    if not words:
+        return False if not return_score else 0
+    matches = sum(1 for word in words if word in dictionary)
+    score = matches / len(words)
+    if return_score:
+        return score
+    return score >= threshold
+
+# Load the dictionary once when the module is imported
+dictionary = load_dictionary('dictionary.txt')
