@@ -6,6 +6,7 @@ import detect_english
 import random
 import string
 from tqdm import tqdm
+
 def generate_random_key(length):
     return ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
 
@@ -17,7 +18,7 @@ def brute_force_decrypt(input_text):
     used_keys = set()
 
     # Brute force Caesar cipher
-    for key in range(len(caesar.ALPHABET)):
+    for key in tqdm(range(len(caesar.ALPHABET))):  # Try all possible Caesar keys
         decrypted_text = caesar.decrypt(input_text, key)
         score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
         if score > best_score:
@@ -30,53 +31,47 @@ def brute_force_decrypt(input_text):
             print("Decrypted text:", decrypted_text)
             return
 
-    # Brute force Substitution cipher
-    # Assuming we have a list of possible substitution keys
-    possible_keys = ["abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba"]  # Add more keys as needed
-    for key in tqdm(possible_keys):
-        decrypted_text = substitution.decrypt(input_text, key)
-        score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
-        if score > best_score:
-            best_score = score
-            best_guess = decrypted_text
-            best_key = key
-            best_method = "Substitution"
-        if score == 1.0:
-            print("Detected English using Substitution cipher with key", key)
-            print("Decrypted text:", decrypted_text)
-            return
-        print('finished substitution')
+    # If Caesar cipher decryption is not perfect, proceed to Substitution cipher
+    if best_method != "Caesar":
+        # Brute force Substitution cipher with random keys
+        used_keys.clear()
+        for _ in tqdm(range(1000)):  # Try 1000 random keys
+            key = ''.join(random.sample(string.ascii_lowercase, len(string.ascii_lowercase)))
+            while key in used_keys:
+                key = ''.join(random.sample(string.ascii_lowercase, len(string.ascii_lowercase)))
+            used_keys.add(key)
+            decrypted_text = substitution.decrypt(input_text, key)
+            score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
+            if score > best_score:
+                best_score = score
+                best_guess = decrypted_text
+                best_key = key
+                best_method = "Substitution"
+            if score == 1.0:
+                print("Detected English using Substitution cipher with key", key)
+                print("Decrypted text:", decrypted_text)
+                return
 
-    # Brute force Vigenere cipher with random keys
-    for _ in tqdm(range(1000)):  # Try 1000 random keys
-        key_length = 6#random.randint(1, 10)
-        key = generate_random_key(key_length)
-        while key in used_keys:
-            key = generate_random_key(key_length)
-        used_keys.add(key)
-        decrypted_text = vigenere.decrypt(input_text, key)
-        score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
-        if score > best_score:
-            best_score = score
-            best_guess = decrypted_text
-            best_key = key
-            best_method = "Vigenere"
-        if score == 1.0:
-            print("Detected English using Vigenere cipher with key", key)
-            print("Decrypted text:", decrypted_text)
-            return
-
-    decrypted_text = vigenere.decrypt(input_text, "woohoo")
-    score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
-    if score > best_score:
-        best_score = score
-        best_guess = decrypted_text
-        best_key = key
-        best_method = "Vigenere"
-    if score == 1.0:
-        print("Detected English using Vigenere cipher with key", "woohoo")
-        print("Decrypted text:", decrypted_text)
-        return
+    # If neither Caesar nor Substitution cipher decryption is perfect, proceed to Vigenere cipher
+    if best_method not in ["Caesar", "Substitution"]:
+        # Brute force Vigenere cipher with random keys of length 6
+        used_keys.clear()
+        for _ in tqdm(range(1000)):  # Try 1000 random keys
+            key = generate_random_key(6)
+            while key in used_keys:
+                key = generate_random_key(6)
+            used_keys.add(key)
+            decrypted_text = vigenere.decrypt(input_text, key)
+            score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
+            if score > best_score:
+                best_score = score
+                best_guess = decrypted_text
+                best_key = key
+                best_method = "Vigenere"
+            if score == 1.0:
+                print("Detected English using Vigenere cipher with key", key)
+                print("Decrypted text:", decrypted_text)
+                return
 
     # If no perfect match is found, print the best guess
     print("No perfect English match found. Best guess:")
