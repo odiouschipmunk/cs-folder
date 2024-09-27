@@ -30,23 +30,24 @@ def test_brute_force_substitution(input_text):
     results = []
     highest_score = 0
     decrypt = ""
-    k = ""
-    alphabet = string.ascii_lowercase[:10]
+    k = 0
+    alphabet = string.ascii_lowercase
     
     # Limit to the first 1000 permutations
     top_keys = list(itertools.permutations(alphabet))[:1000]
     
     for key in tqdm([''.join(p) for p in top_keys]):
-        decrypted_text = substitution.decrypt(input_text, key, alphabet)
+        decrypted_text = substitution.decrypt(input_text, key)
         score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
         if score > highest_score:
             highest_score = score
             decrypt = decrypted_text
             k = key
-            results.append((highest_score, k, decrypt))
+            results.append((highest_score, decrypt, k))
     
     print(f'highest score for substitution: {highest_score}\ndecrypted text: {decrypt}\nkey: {k}')
     return results
+
 
 def brute_force_substitution(input_text):
     results = []
