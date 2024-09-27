@@ -74,7 +74,7 @@ def test_brute_force_vigenere(input_text):
     highest_score=0
     decrypt=""
     k=0
-    for key in tqdm([''.join(p) for p in itertools.product(alphabet, repeat=3)]):
+    for key in tqdm([''.join(p) for p in itertools.product(alphabet, repeat=4)]):
         decrypted_text = vigenere.decrypt(input_text, key)
         score=detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
         if score>highest_score:

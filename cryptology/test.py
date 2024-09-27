@@ -89,7 +89,7 @@ def main():
         total_results=[[]]
         total_results.append(brute_force.brute_force_caesar(input_text))
         total_results.append(brute_force.brute_force_vigenere(input_text))
-        total_results.append(brute_force.brute_force_substitution(input_text))
+        #total_results.append(brute_force.brute_force_substitution(input_text))
 
         with open('brute_force_results.txt', 'w') as file:
             for result in total_results:
