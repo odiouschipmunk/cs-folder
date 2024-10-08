@@ -5,8 +5,7 @@ def load_dictionary(file_path):
     with open(file_path, 'r') as file:
         words = file.read().split()
     return set(word.lower() for word in words)
-# Load the dictionary once when the module is imported
-dictionary = load_dictionary('dictionary.txt')
+
 # Check if the text is English based on the dictionary
 def is_english(text, dictionary, threshold=0.5, return_score=False):
     words = re.findall(r'\b\w+\b', text.lower())
@@ -18,3 +17,5 @@ def is_english(text, dictionary, threshold=0.5, return_score=False):
         return score
     return score >= threshold
 
+# Load the dictionary once when the module is imported
+dictionary = load_dictionary('dictionary.txt')
