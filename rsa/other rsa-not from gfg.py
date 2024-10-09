@@ -118,7 +118,7 @@ def decrypt_message():
         again = input("decrypt? y or n").lower()
         print("")
 
-# Main interface combining both key generation and encrypt/decrypt routines
+#?
 def rsa_interface():
     public_key, private_key = None, None
     
