@@ -1,0 +1,5 @@
+Public Key: 3015
+Private Key: 9047
+Public Modulus: 3127
+encrypted phone number: 1842
+plaintext phone number: 640
