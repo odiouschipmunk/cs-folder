@@ -12,29 +12,26 @@ SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.'
 def main():
     # Runs a test that encrypts a message to a file or decrypts a message
     # from a file.
-    filename = 'encrypted_file.txt' # The file to write to/read from.
-    mode = 'decrypt' # Set to either 'encrypt' or 'decrypt'.
+    filename = 'plaintext.txt' # The file to write to/read from.
+    enctime=time.time()
+    with open(filename, 'r') as file:
+        content = file.read()
+    pubKeyFilename = 'al_sweigart_pubkey.txt'
+    print('Encrypting and writing to %s...' % ('encrypted_file.txt'))
+    encryptedText = encryptAndWriteToFile('encrypted_file.txt', pubKeyFilename, content)
 
-    if mode == 'encrypt':
-        message = ('Journalists belong in the gutter because that is where '
-                   'the ruling classes throw their guilty secrets. Gerald Priestland. '
-                   'The Founding Fathers gave the free press the protection it must '
-                   'have to bare the secrets of government and inform the people. '
-                   'Hugo Black.')
-        pubKeyFilename = 'al_sweigart_pubkey.txt'
-        print('Encrypting and writing to %s...' % (filename))
-        encryptedText = encryptAndWriteToFile(filename, pubKeyFilename, message)
-
-        print('Encrypted text:')
-        print(encryptedText)
-
-    elif mode == 'decrypt':
-        privKeyFilename = 'al_sweigart_privkey.txt'
-        print('Reading from %s and decrypting...' % (filename))
-        decryptedText = readFromFileAndDecrypt(filename, privKeyFilename)
-
-        print('Decrypted text:')
-        print(decryptedText)
+    print('Encrypted text:')
+    print(encryptedText)
+    print("Time taken to encrypt: ", time.time()-enctime)
+    decryptime=time.time()
+    privKeyFilename = 'al_sweigart_privkey.txt'
+    print('Reading from %s and decrypting...' % ('encrypted_file.txt'))
+    decryptedText = readFromFileAndDecrypt('encrypted_file.txt', privKeyFilename)
+    with open('decrypted_file.txt', 'w') as file:
+        file.write(decryptedText)
+    print('Decrypted text:')
+    print(decryptedText)
+    print("Time taken to decrypt: ", time.time()-decryptime)
 
 def getBlocksFromText(message, blockSize):
     # Converts a string message to a list of block integers.
@@ -97,7 +94,8 @@ def readKeyFile(keyFilename):
         content = fo.read()
     keySize, n, EorD = content.split(',')
     return (int(keySize), int(n), int(EorD))
-
+#with increasing block sizes, time taken to encrypt and decrypt is a lot faster
+#decrypt is usually 2-3x slower than decrypt
 def encryptAndWriteToFile(messageFilename, keyFilename, message, blockSize=None):
     # Using a key from a key file, encrypt the message and save it to a
     # file. Returns the encrypted message string.
@@ -150,5 +148,8 @@ def readFromFileAndDecrypt(messageFilename, keyFilename):
 
 # If publicKeyCipher.py is run (instead of imported as a module), call
 # the main() function.
+import time
 if __name__ == '__main__':
+    starttime=time.time()
     main()
+    print("Time taken: ", time.time()-starttime)

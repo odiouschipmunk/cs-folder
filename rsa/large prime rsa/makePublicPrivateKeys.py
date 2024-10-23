@@ -8,7 +8,7 @@ def main():
     starttime=time.time()
 
     print('Making key files...')
-    makeKeyFiles('al_sweigart', 1024)
+    makeKeyFiles('al_sweigart', 4096)
     print('Key files made.')
     endtime=time.time()
     print(f'Time taken to make key files: {endtime-starttime:.6f}')
