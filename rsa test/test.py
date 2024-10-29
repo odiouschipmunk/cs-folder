@@ -35,3 +35,6 @@ with open('encrypted_phone.txt', 'w') as f:
     f.write(f'encrypted phone number: {encrypt(640)}')#last 4 phone numbers are 9640, so i did 640
 with open('final_output.txt', 'w') as f:
     f.write(f'Public Key: {pub_key}\nPrivate Key: {priv_key}\nPublic Modulus: {public_mod}\nencrypted phone number: {encrypt(640)}\nplaintext phone number: 640')
+def decrypt(cipher):
+    return pow(cipher,priv_key,public_mod)
+print(f'decrypted phone number: {decrypt(encrypt(640))}')
