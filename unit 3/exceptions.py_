@@ -1,0 +1,15 @@
+def exceptions():
+    possiblenumbers=[1,2,3,4,5,6,7,8,9,10]
+    number=int(input("Enter an int from 1-10: "))
+    while number not in possiblenumbers:
+        
+        print("That is not a valid number")
+        number=int(input("Enter a number: "))
+    print("You entered a valid number")
+    numbertosqrt=int(input("Enter a number to square root: "))
+    try:
+        import math
+        print(f"The square root of {numbertosqrt} is {math.sqrt(numbertosqrt)}")
+    except:
+        print("That is not a valid number to square root")
+exceptions()

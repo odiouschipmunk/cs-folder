@@ -1,0 +1,11 @@
+
+def get_unique_letters(arrayofstring):
+    #get all unique letters of arrayofstring
+    uniqueletters=[]
+    for string in arrayofstring:
+        for letter in string:
+            if letter not in uniqueletters:
+                uniqueletters.append(letter)
+    return uniqueletters
+
+print(get_unique_letters(['hello', 'my', 'name', 'is', 'mrawesome']))

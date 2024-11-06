@@ -1,0 +1,30 @@
+import random
+#keep the letters that are correct and modify the rest of the stirng
+alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ']
+def generate_string(length, goodstring):
+    return goodstring+"".join(random.choice(alphabet) for i in range(length-len(goodstring)))
+import time
+start=time.time()
+string='boomshakalaka'
+goodstring=''
+good=0
+generated_string=''
+def check(goodstring=goodstring, good=good, generated_string=generated_string):
+    while True:
+        generated_string=generate_string(len(string), goodstring)
+        #check the number of consecutive letters that are correct
+        for i in range(len(string)):
+            if generated_string[i]==string[i]:
+                good+=1
+            else:
+                break
+        if good==len(string):
+            break
+        goodstring=generated_string[:good]
+        good=0
+        print(generated_string)    
+    
+check()
+print(string)
+print(generated_string)
+print(f'time it took: {time.time()-start}')
