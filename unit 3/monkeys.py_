@@ -5,7 +5,7 @@ def generate_string(length, goodstring):
     return goodstring+"".join(random.choice(alphabet) for i in range(length-len(goodstring)))
 import time
 start=time.time()
-string='boomshakalaka'
+string='In one Python file called exceptionsfunctionspy write out your own examples based on the textbook chapters Submit the complete file on Schoology'.lower()
 goodstring=''
 good=0
 generated_string=''
@@ -22,9 +22,8 @@ def check(goodstring=goodstring, good=good, generated_string=generated_string):
             break
         goodstring=generated_string[:good]
         good=0
-        print(generated_string)    
+        #print(generated_string)    
     
 check()
 print(string)
-print(generated_string)
 print(f'time it took: {time.time()-start}')
