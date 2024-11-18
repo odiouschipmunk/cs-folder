@@ -9,9 +9,7 @@ def read_data():
 csvdata=read_data()
 print(f'csv data: {csvdata}')
 #if 'mr b' is in csv data, then output to output.txt
-def output_mr_b():
-    with open('output.txt', 'w') as file:
-        for row in csvdata:
-            if 'mr b' in row:
-                file.write(f'{row}\n')
-output_mr_b()
+mr_b=[row for row in csvdata if 'mr b' in row]
+print(f'mr b: {mr_b}')
+print(f'type of mr b: {type(mr_b)}')
+print(f'')

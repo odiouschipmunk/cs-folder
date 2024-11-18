@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Send Anonymous Feedback</h1>
+        <form method="post">
+            <label for="teacher">Choose a teacher:</label>
+            <input type="text" id="teacherSearch" placeholder="Search for teachers...">
+            <select name="teacher" id="teacherSelect" required size="5">
+    <!-- Options will be populated by scripts.js -->
+</select>
+
+        <label for="course">Choose a class:</label>
+        <select name="course" id="courseSelect" required>
+            <option value="">Select a teacher first</option>
+        </select>
+
+            <label for="message">Your Message:</label>
+            <textarea name="message" id="message" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

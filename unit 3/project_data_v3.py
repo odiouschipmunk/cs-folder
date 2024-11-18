@@ -5,14 +5,17 @@ all_teachers=[['mr b', 'com sci'], ['mr a', 'math'], ['mr c', 'english']]
 print('teachers:')
 for teacher in all_teachers:
     print(teacher[0])
+#get data from user and add it
 def teacher1():
     teacher=input('who do you want to send this message to?')
     while teacher not in [teacher[0] for teacher in all_teachers]:
         print('teacher not found')
         teacher=input('who do you want to send this message to?')
     classt=input('what class is this for?')
-    while classt not in [teacher[1] for teacher in all_teachers]:
-        print('class not found')
+    #check if the class matches up with the teacher
+    teacherindex=[teacher[0] for teacher in all_teachers].index(teacher)
+    while classt!=all_teachers[teacherindex][1]:
+        print('class does not match up with teacher')
         classt=input('what class is this for?')
     return [teacher, classt]
 message=input('what do you wanna say to a teacher?')
@@ -25,7 +28,7 @@ print(f'added {message} to the list of reviews')
 print(f'all data: {basic_data}')
 #export data as a csv file
 import csv
-with open('project_data.csv', 'w', newline='') as file:
+with open('project_data.csv', 'a', newline='') as file:
     #in the form of message, teacher name, class
     writer=csv.writer(file)
     writer.writerows(basic_data)
