@@ -1,88 +1,58 @@
 body {
-    background-color: #121212;
-    color: #FFFFFF;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: "Inter", sans-serif;
 }
 
 .container {
-    width: 90%;
     max-width: 600px;
-    margin: 50px auto;
-    animation: fadeIn 1s ease-in-out;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form label {
     display: block;
-    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
-form input[type="text"],
+form input,
 form select,
 form textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    background-color: #1E1E1E;
-    border: 1px solid #BB86FC;
-    border-radius: 5px;
-    color: #FFFFFF;
-    font-size: 16px;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-form input[type="text"]:focus,
-form select:focus,
-form textarea:focus {
-    background-color: #2E2E2E;
-    border-color: #3700B3;
-    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 form button {
-    margin-top: 20px;
-    width: 100%;
-    padding: 15px;
-    background-color: #BB86FC;
+    background: #007bff;
+    color: white;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
-    color: #FFFFFF;
-    font-size: 18px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
 }
 
 form button:hover {
-    background-color: #3700B3;
-    transform: scale(1.05);
+    background: #0056b3;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+button {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-/* Scrollbar styling */
-form select {
-    scrollbar-width: thin;
-    scrollbar-color: #BB86FC #1E1E1E;
-}
-
-form select::-webkit-scrollbar {
-    width: 8px;
-}
-
-form select::-webkit-scrollbar-track {
-    background: #1E1E1E;
-}
-
-form select::-webkit-scrollbar-thumb {
-    background-color: #BB86FC;
-    border-radius: 5px;
+button:hover {
+    background: #218838;
 }

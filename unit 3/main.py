@@ -1,14 +1,14 @@
 import csv
 from pathlib import Path
 
-# Initialize CSV file if it doesn't exist
+# create CSV file if it doesn't exist
 def init_csv():
     if not Path('teacher_reviews.csv').exists():
         with open('teacher_reviews.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['review', 'teacher', 'class'])  # header
 
-# Read existing reviews
+#read existing reviews
 def read_reviews():
     reviews = []
     try:
@@ -20,13 +20,13 @@ def read_reviews():
         init_csv()
     return reviews
 
-# Write a new review
+# new review
 def write_review(review):
     with open('teacher_reviews.csv', 'a', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(review)
 
-# Teacher data
+# basic data
 all_teachers = [['mr b', 'com sci'], ['mr a', 'math'], ['mr c', 'english']]
 
 def teacher1():
@@ -34,7 +34,7 @@ def teacher1():
     while teacher not in [t[0] for t in all_teachers]:
         print('teacher not found')
         teacher = input('who do you want to send this message to?')
-    
+
     classt = input('what class is this for?')
     teacherindex = [t[0] for t in all_teachers].index(teacher)
     while classt != all_teachers[teacherindex][1]:
@@ -53,7 +53,7 @@ def get_teachers():
                     if teacher_name not in teachers:
                         teachers[teacher_name] = set()
                     teachers[teacher_name].add(course_name)
-        # Convert sets to sorted lists
+        # sets to sorted lists
         for teacher in teachers:
             teachers[teacher] = sorted(teachers[teacher])
         return teachers
@@ -62,27 +62,28 @@ def get_teachers():
         return {}
 print(get_teachers())
 def main():
-    # Initialize CSV if needed
+    # create CSV if needed
     init_csv()
-    
-    # Print available teachers
+
+    # show available teachers
     print('teachers:')
     for teacher in all_teachers:
         print(teacher[0])
-    
-    # Get new review
+
+    # new review
     message = input('what do you wanna say to a teacher?')
     teach = teacher1()
     teacher, classt = teach[0], teach[1]
-    
-    # Save review
+
+    # save review
     review = [message, teacher, classt]
     write_review(review)
-    
-    # Show confirmation
+
+
+
     print(f'added {message} to reviews')
-    
-    # Show all reviews
+
+    # all reviews
     print('all reviews:')
     for review in read_reviews():
         print(review)
