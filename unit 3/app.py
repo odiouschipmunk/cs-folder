@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import csv
 from pathlib import Path
+
 app = Flask(__name__)
 
 # Initialize CSV file if it doesn't exist
@@ -65,6 +66,13 @@ def get_teachers_route():
 @app.route('/thanks')
 def thanks():
     return render_template('thanks.html')
+    @app.route('/feedback', methods=['GET'])
+    def feedback():
+        teacher = request.args.get('teacher')
+        course = request.args.get('course')
+        reviews = read_reviews()
+        filtered_reviews = [review for review in reviews if review['teacher'] == teacher and review['class'] == course]
+        return render_template('feedback.html', teacher=teacher, course=course, reviews=filtered_reviews)
 
 if __name__ == '__main__':
     app.run(debug=True)
