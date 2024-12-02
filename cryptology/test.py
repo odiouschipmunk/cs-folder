@@ -7,8 +7,10 @@ import random
 import string
 from tqdm import tqdm
 
+
 def generate_random_key(length):
-    return ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
+    return "".join(random.choice(string.ascii_lowercase) for _ in range(length))
+
 
 def brute_force_decrypt(input_text):
     best_guess = ""
@@ -20,7 +22,9 @@ def brute_force_decrypt(input_text):
     # Brute force Caesar cipher
     for key in tqdm(range(len(caesar.ALPHABET))):  # Try all possible Caesar keys
         decrypted_text = caesar.decrypt(input_text, key)
-        score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
+        score = detect_english.is_english(
+            decrypted_text, detect_english.dictionary, return_score=True
+        )
         if score > best_score:
             best_score = score
             best_guess = decrypted_text
@@ -36,12 +40,18 @@ def brute_force_decrypt(input_text):
         # Brute force Substitution cipher with random keys
         used_keys.clear()
         for _ in tqdm(range(1000)):  # Try 1000 random keys
-            key = ''.join(random.sample(string.ascii_lowercase, len(string.ascii_lowercase)))
+            key = "".join(
+                random.sample(string.ascii_lowercase, len(string.ascii_lowercase))
+            )
             while key in used_keys:
-                key = ''.join(random.sample(string.ascii_lowercase, len(string.ascii_lowercase)))
+                key = "".join(
+                    random.sample(string.ascii_lowercase, len(string.ascii_lowercase))
+                )
             used_keys.add(key)
             decrypted_text = substitution.decrypt(input_text, key)
-            score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
+            score = detect_english.is_english(
+                decrypted_text, detect_english.dictionary, return_score=True
+            )
             if score > best_score:
                 best_score = score
                 best_guess = decrypted_text
@@ -62,7 +72,9 @@ def brute_force_decrypt(input_text):
                 key = generate_random_key(6)
             used_keys.add(key)
             decrypted_text = vigenere.decrypt(input_text, key)
-            score = detect_english.is_english(decrypted_text, detect_english.dictionary, return_score=True)
+            score = detect_english.is_english(
+                decrypted_text, detect_english.dictionary, return_score=True
+            )
             if score > best_score:
                 best_score = score
                 best_guess = decrypted_text
@@ -79,43 +91,48 @@ def brute_force_decrypt(input_text):
     print("Key:", best_key)
     print("Decrypted text:", best_guess)
 
+
 def main():
     # Read input from a text file
-    with open('input.txt', 'r') as file:
+    with open("input.txt", "r") as file:
         input_text = file.read().strip()
 
     # Choose the action
-    action = input("Do you want to encrypt, decrypt, or brute force the message? (encrypt/decrypt/brute force): ").lower()
+    action = input(
+        "Do you want to encrypt, decrypt, or brute force the message? (encrypt/decrypt/brute force): "
+    ).lower()
 
-    if action == 'encrypt' or action == 'decrypt':
+    if action == "encrypt" or action == "decrypt":
         # Choose the cipher method
-        cipher_method = input("Choose the cipher method (caesar, substitution, vigenere): ").lower()
+        cipher_method = input(
+            "Choose the cipher method (caesar, substitution, vigenere): "
+        ).lower()
 
-        if cipher_method == 'caesar':
+        if cipher_method == "caesar":
             key = int(input("Enter the Caesar cipher key: "))
-            if action == 'encrypt':
+            if action == "encrypt":
                 output_text = caesar.encrypt(input_text, key)
-            elif action == 'decrypt':
+            elif action == "decrypt":
                 output_text = caesar.decrypt(input_text, key)
             else:
                 print("Invalid action.")
                 return
 
-        elif cipher_method == 'substitution':
+        elif cipher_method == "substitution":
             key = input("Enter the substitution cipher key: ")
-            if action == 'encrypt':
+            if action == "encrypt":
                 output_text = substitution.encrypt(input_text, key)
-            elif action == 'decrypt':
+            elif action == "decrypt":
                 output_text = substitution.decrypt(input_text, key)
             else:
                 print("Invalid action.")
                 return
 
-        elif cipher_method == 'vigenere':
+        elif cipher_method == "vigenere":
             key = input("Enter the Vigenere cipher key: ").lower()
-            if action == 'encrypt':
+            if action == "encrypt":
                 output_text = vigenere.encrypt(input_text, key)
-            elif action == 'decrypt':
+            elif action == "decrypt":
                 output_text = vigenere.decrypt(input_text, key)
             else:
                 print("Invalid action.")
@@ -126,7 +143,7 @@ def main():
             return
 
         # Write output to a text file
-        with open('output.txt', 'w') as file:
+        with open("output.txt", "w") as file:
             file.write(output_text)
 
         # Compute letter frequency and detect English
@@ -138,14 +155,14 @@ def main():
         print("Letter Frequency:", letter_freq)
         print("Is the text English?", is_english)
 
-    elif action == 'brute force':
+    elif action == "brute force":
         # Choose the cipher method
-        total_results=[[]]
+        total_results = [[]]
         total_results.append(brute_force.brute_force_caesar(input_text))
         total_results.append(brute_force.brute_force_vigenere(input_text))
         total_results.append(brute_force.brute_force_substitution(input_text))
 
-        with open('brute_force_results.txt', 'w') as file:
+        with open("brute_force_results.txt", "w") as file:
             for result in total_results:
                 for highest_score, decrypt, k in result:
                     file.write(f"Highest score: {highest_score}\n")
@@ -155,6 +172,7 @@ def main():
 
     else:
         print("Invalid action.")
+
 
 if __name__ == "__main__":
     main()

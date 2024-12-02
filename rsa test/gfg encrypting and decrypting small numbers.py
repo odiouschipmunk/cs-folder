@@ -3,9 +3,9 @@ import math
 
 def gcd(a, h):
     temp = 0
-    while(1):
+    while 1:
         temp = a % h
-        if (temp == 0):
+        if temp == 0:
             return h
         a = h
         h = temp
@@ -13,25 +13,24 @@ def gcd(a, h):
 
 p = 3
 q = 7
-n = p*q
+n = p * q
 e = 2
-phi = (p-1)*(q-1)
+phi = (p - 1) * (q - 1)
 
-while (e < phi):
-
+while e < phi:
     # e must be co-prime to phi and
     # smaller than phi.
-    if(gcd(e, phi) == 1):
+    if gcd(e, phi) == 1:
         break
     else:
-        e = e+1
+        e = e + 1
 
 # Private key (d stands for decrypt)
 # choosing d such that it satisfies
 # d*e = 1 + k * totient
 
 k = 2
-d = (1 + (k*phi))/e
+d = (1 + (k * phi)) / e
 
 # Message to be encrypted
 msg = 12.0

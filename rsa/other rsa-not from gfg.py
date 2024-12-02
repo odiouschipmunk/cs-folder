@@ -1,6 +1,7 @@
 import random
 from math import gcd
 
+
 # Function to compute the greatest common divisor
 def egcd(a, b):
     if a == 0:
@@ -9,13 +10,15 @@ def egcd(a, b):
         g, y, x = egcd(b % a, a)
         return g, x - (b // a) * y, y
 
+
 # Function to find the modular inverse of e mod phi
 def modinv(e, phi):
     g, x, y = egcd(e, phi)
     if g != 1:
-        raise Exception('Modular inverse does not exist')
+        raise Exception("Modular inverse does not exist")
     else:
         return x % phi
+
 
 # Function to generate RSA keys
 def generate_keys():
@@ -32,7 +35,7 @@ def generate_keys():
                 return False
             i += 6
         return True
-    
+
     # Generate two distinct prime numbers
     def generate_prime():
         while True:
@@ -70,15 +73,18 @@ def generate_keys():
 
     return (e, n), (d, n)
 
+
 # f to encrypt a message using RSA
 def rsa_encrypt(message, public_key):
     e, n = public_key
-    return (message ** e) % n
+    return (message**e) % n
+
 
 # f to decrypt a message using RSA
 def rsa_decrypt(ciphertext, private_key):
     d, n = private_key
-    return (ciphertext ** d) % n
+    return (ciphertext**d) % n
+
 
 # e messages (your example)
 def encrypt_message():
@@ -89,15 +95,16 @@ def encrypt_message():
             pt = int(input("message "))
             publicKey = int(input("friend public key"))
             publicMod = int(input("friend public mod "))
-            ct = (pt ** publicKey) % publicMod
+            ct = (pt**publicKey) % publicMod
             print(f"calc: ({pt}^{publicKey}) mod {publicMod}")
             print(f"msg: {ct}")
         except ValueError:
             print("please enter good values")
-        
+
         print("")
         again = input("enc another message? Type 'y' for yes or 'n' for no: ").lower()
         print("")
+
 
 # Decrypt messages (your example)
 def decrypt_message():
@@ -108,27 +115,28 @@ def decrypt_message():
             ct = int(input("message sent"))
             privateKey = int(input("your private key"))
             publicMod = int(input("you public mod"))
-            pt = (ct ** privateKey) % publicMod
+            pt = (ct**privateKey) % publicMod
             print(f"calc: ({ct}^{privateKey}) mod {publicMod}")
             print(f"orignal message: {pt}")
         except ValueError:
             print("enter good values pleae")
-        
+
         print("")
         again = input("decrypt? y or n").lower()
         print("")
 
-#?
+
+# ?
 def rsa_interface():
     public_key, private_key = None, None
-    
+
     while True:
         print("=== RSA Encryption/Decryption Program ===")
         print("1. Generate RSA keys")
         print("2. Encrypt a message")
         print("3. Decrypt a message")
         print("4. Exit")
-        
+
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -137,13 +145,13 @@ def rsa_interface():
             print(f"Public Key: {public_key}")
             print(f"Private Key: {private_key}")
             print(f"Modulus (n): {public_key[1]}")
-        
+
         elif choice == "2":
             if not public_key or not private_key:
                 print("You must generate RSA keys first.")
             else:
                 encrypt_message()
-        
+
         elif choice == "3":
             if not public_key or not private_key:
                 print("You must generate RSA keys first.")
@@ -156,6 +164,7 @@ def rsa_interface():
 
         else:
             print("Invalid choice, please select 1, 2, 3, or 4.")
+
 
 if __name__ == "__main__":
     rsa_interface()

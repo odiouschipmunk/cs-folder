@@ -1,5 +1,6 @@
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 
+
 def encrypt(message, key):
     key = key.lower()
     encrypted_result = ""
@@ -13,6 +14,7 @@ def encrypt(message, key):
         else:
             encrypted_result += char
     return encrypted_result
+
 
 def decrypt(message, key):
     key = key.lower()
