@@ -9,6 +9,7 @@ public_key = None
 private_key = None
 n = None
 
+
 # We will run the function only once to fill the set of
 # prime numbers
 def primefiller():
@@ -103,14 +104,14 @@ def encoder(message):
 
 
 def decoder(encoded):
-    s = ''
+    s = ""
     # Calling the decrypting function decoding function
     for num in encoded:
         s += chr(decrypt(num))
     return s
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     primefiller()
     setkeys()
     message = "Test Message"
@@ -122,6 +123,6 @@ if __name__ == '__main__':
     print("Initial message:")
     print(message)
     print("\n\nThe encoded message(encrypted by public key)\n")
-    print(''.join(str(p) for p in coded))
+    print("".join(str(p) for p in coded))
     print("\n\nThe decoded message(decrypted by public key)\n")
-    print(''.join(str(p) for p in decoder(coded)))
+    print("".join(str(p) for p in decoder(coded)))

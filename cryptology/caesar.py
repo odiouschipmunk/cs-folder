@@ -1,5 +1,6 @@
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
 
+
 def encrypt(message, key):
     encrypted_result = ""
     for char in message:
@@ -10,11 +11,13 @@ def encrypt(message, key):
             encrypted_result += char
     return encrypted_result
 
+
 ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+
 
 def decrypt(message, key):
     decrypted_result = ""
-    
+
     for char in message:
         if char in ALPHABET:
             alphabetic_index = ALPHABET.index(char)
@@ -22,5 +25,5 @@ def decrypt(message, key):
             decrypted_result += ALPHABET[new_index]
         else:
             decrypted_result += char
-    
+
     return decrypted_result

@@ -2,9 +2,11 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/')
+
+@app.route("/")
 def home():
     return HOME_HTML
+
 
 HOME_HTML = """
     <html><body>
@@ -16,18 +18,20 @@ HOME_HTML = """
         </form>
     </body></html>"""
 
-@app.route('/greet')
+
+@app.route("/greet")
 def greet():
-    username = request.args.get('username', '')
-    favfood = request.args.get('favfood', '')
-    if username == '':
-        username = 'World'
-    if favfood == '':
-        msg = 'You did not tell me your favorite food.'
+    username = request.args.get("username", "")
+    favfood = request.args.get("favfood", "")
+    if username == "":
+        username = "World"
+    if favfood == "":
+        msg = "You did not tell me your favorite food."
     else:
-        msg = 'I like ' + favfood + ', too.'
+        msg = "I like " + favfood + ", too."
 
     return GREET_HTML.format(username, msg)
+
 
 GREET_HTML = """
     <html><body>
