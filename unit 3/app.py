@@ -41,6 +41,18 @@ def feedback():
     )
 
 
+@app.route("/get_reviews", methods=["GET"])
+def get_reviews():
+    print(f'args: {request.args}')
+    teacher = request.args.get("teacher")
+    reviews = Functions.show_reviews(teacher)
+    print(reviews)
+    
+    if jsonify(reviews) is not None:
+        return jsonify(reviews)
+    else:
+        return "No reviews found for this teacher"
+    #able to get the reviews for a teacher by going to /get_reviews?teacher=teacher_name
 
 if __name__ == "__main__":
     app.run(debug=True)

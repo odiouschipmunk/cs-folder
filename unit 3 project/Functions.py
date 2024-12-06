@@ -7,6 +7,7 @@ def init_csv():
         with open("teacher_reviews.csv", "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(["review", "teacher", "class"])
+            
 def get_teachers():
     teachers = {}
     try:
@@ -42,3 +43,9 @@ def write_review(review):
     with open("teacher_reviews.csv", "a", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(review)
+
+def show_reviews(teacher):
+    reviews = read_reviews()
+    filtered_reviews= [review for review in reviews if review["teacher"]==teacher]
+    #if filtered_reviews is not None
+    return [review for review in reviews if review["teacher"] == teacher]
