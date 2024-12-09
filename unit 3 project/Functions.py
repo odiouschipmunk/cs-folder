@@ -46,6 +46,4 @@ def write_review(review):
 
 def show_reviews(teacher):
     reviews = read_reviews()
-    filtered_reviews= [review for review in reviews if review["teacher"]==teacher]
-    #if filtered_reviews is not None
     return [review for review in reviews if review["teacher"] == teacher]
