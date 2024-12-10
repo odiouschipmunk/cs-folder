@@ -1,0 +1,21 @@
+<!-- templates/select_teacher.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h2 class="text-xl font-bold text-gray-800 dark:text-white">View Reviews</h2>
+    <form method="post" class="space-y-4">
+        <div>
+            <label for="teacher" class="block text-gray-700 dark:text-gray-300">Choose a teacher:</label>
+            <select name="teacher" id="teacherSelect" required class="w-full p-2 border border-gray-300 rounded-md mt-2">
+                {% for teacher in teachers %}
+                    <option value="{{ teacher }}">{{ teacher }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded-md">
+            View Reviews
+        </button>
+    </form>
+</div>
+{% endblock %}

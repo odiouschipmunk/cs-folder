@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from . import Functions
+import Functions
 app = Flask(__name__)
 
 
@@ -41,18 +41,16 @@ def feedback():
     )
 
 
-@app.route("/get_reviews", methods=["GET"])
-def get_reviews():
-    print(f'args: {request.args}')
-    teacher = request.args.get("teacher")
-    reviews = Functions.show_reviews(teacher)
-    print(reviews)
-    
-    if jsonify(reviews) is not None:
-        return jsonify(reviews)
+@app.route('/view_reviews', methods=['GET', 'POST'])
+def view_reviews():
+    Functions.init_csv()
+    if request.method == 'POST':
+        teacher = request.form['teacher']
+        filtered_reviews=Functions.show_reviews(teacher)
+        return render_template('view_reviews.html', teacher=teacher, reviews=filtered_reviews)
     else:
-        return "No reviews found for this teacher"
-    #able to get the reviews for a teacher by going to /get_reviews?teacher=teacher_name
+        teachers = Functions.get_teachers()
+        return render_template('select_teacher.html', teachers=teachers)
 
 if __name__ == "__main__":
     app.run(debug=True)

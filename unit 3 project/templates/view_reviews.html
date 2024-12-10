@@ -1,0 +1,22 @@
+<!-- templates/view_reviews.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h2 class="text-xl font-bold text-gray-800 dark:text-white">Reviews for {{ teacher }}</h2>
+    {% if reviews %}
+        <ul class="space-y-2">
+            {% for review in reviews %}
+                <li class="text-white">
+                    <br><br>
+                    Review: {{ review['review'] }} <br>
+                    Class: ({{ review['class'] }})
+                    <br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-700 dark:text-gray-300">No reviews available for this teacher.</p>
+    {% endif %}
+</div>
+{% endblock %}
