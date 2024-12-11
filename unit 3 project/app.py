@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     Functions.init_csv()
-    teachers = Functions.get_teachers()
+    teachers = Functions.v()
     if request.method == "POST":
         teacher = request.form["teacher"]
         course = request.form["course"]
