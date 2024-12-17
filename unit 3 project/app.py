@@ -2,11 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 import Functions
 app = Flask(__name__)
 
-
 @app.route("/", methods=["GET", "POST"])
 def index():
     Functions.init_csv()
-    teachers = Functions.v()
+    teachers = Functions.get_teachers()
     if request.method == "POST":
         teacher = request.form["teacher"]
         course = request.form["course"]

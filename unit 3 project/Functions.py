@@ -14,11 +14,11 @@ def get_teachers():
         '''
         Goes through the teacher_data.csv file and gets all the unique teachers and what courses they teach
         '''
-        with open("teacher_data.csv", "r", newline="", encoding="utf-8") as f:
+        with open("teacher_data_revised.csv", "r", newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for row in reader:
                 teacher_name = row.get("Teacher", "").strip()
-                course_name = row.get("Course Name", "").strip()
+                course_name = row.get("Description", "").strip()
                 if teacher_name and course_name: #is not empty
                     if teacher_name not in teachers:
                         teachers[teacher_name] = set()
