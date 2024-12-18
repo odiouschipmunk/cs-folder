@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import Functions
+from better_profanity import profanity
+
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -10,6 +12,7 @@ def index():
         teacher = request.form["teacher"]
         course = request.form["course"]
         message = request.form["message"]
+        message = profanity.censor(message)
         Functions.write_review([message, teacher, course])
         return redirect(url_for("thanks"))
     return render_template("index.html", teachers=teachers)
