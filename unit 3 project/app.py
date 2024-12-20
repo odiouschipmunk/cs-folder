@@ -55,4 +55,4 @@ def view_reviews():
         return render_template('select_teacher.html', teachers=teachers)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=80)
