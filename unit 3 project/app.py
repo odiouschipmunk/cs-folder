@@ -30,7 +30,7 @@ def thanks():
 
 @app.route("/feedback", methods=["GET"])
 def feedback():
-    teacher = request.args.get("teacher")
+    teacher = request.args.get("teacher") 
     course = request.args.get("course")
     reviews = Functions.read_reviews()
     filtered_reviews = [
