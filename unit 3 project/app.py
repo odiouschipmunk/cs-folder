@@ -54,5 +54,9 @@ def view_reviews():
         teachers = Functions.get_teachers()
         return render_template('select_teacher.html', teachers=teachers)
 
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

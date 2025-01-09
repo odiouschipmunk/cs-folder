@@ -25,11 +25,19 @@
     <body
         class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300"
     >
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white font-bold text-xl">Anonymous Teacher Feedback</a>
+            <div class="space-x-4">
+                <a href="/" class="text-white hover:text-gray-300">Home</a>
+                <a href="{{ url_for('view_reviews') }}" class="text-white hover:text-gray-300">View All Teacher Feedback</a>
+                <a href="{{ url_for('about') }}" class="text-white hover:text-gray-300">About</a>
+            </div>
+        </div>
+    </nav>
         <nav class="p-4 bg-gray-100 dark:bg-gray-800">
             <div class="container mx-auto flex justify-between items-center">
-                <h1 class="text-2xl font-bold text-gray-800 dark:text-white">
-                    Teacher Reviews
-                </h1>
+                
                 
                 </button>
             </div>
