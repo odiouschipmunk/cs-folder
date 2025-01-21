@@ -2,22 +2,21 @@
 
 {% block content %}
 <div class="container mx-auto p-8">
-    <!-- Hero Section -->
-    <div class="text-center mb-8 fade-in">
-        <h1 class="text-4xl font-bold text-gray-800 dark:text-white slide-in">
+    <div class="text-center mb-12 fade-in">
+        <h1 class="text-5xl font-bold text-gray-800 dark:text-white slide-in mb-4">
             Welcome to Anonymous Teacher Feedback
         </h1>
-        <p class="mt-4 text-gray-600 dark:text-gray-300 fade-in">
+        <p class="mt-4 text-xl text-gray-600 dark:text-gray-300 fade-in max-w-2xl mx-auto">
             Provide your honest feedback anonymously to help improve teaching quality.
         </p>
     </div>
     
-    <a href="{{ url_for('view_reviews') }}" class="button-secondary w-full mb-6 block text-center hover-scale fade-in">
+    <a href="{{ url_for('view_reviews') }}" 
+       class="button-secondary w-full mb-8 block text-center hover-scale fade-in text-lg">
         View Previous Feedback
     </a>
     
-    <!-- Feedback Form -->
-    <form method="post" class="space-y-6 card fade-in" style="animation-delay: 0.2s">
+    <form method="post" class="space-y-8 card fade-in max-w-4xl mx-auto" style="animation-delay: 0.2s">
         <div>
             <label for="teacher" class="block text-gray-700 dark:text-gray-300">Choose a teacher:</label>
             <input
@@ -57,11 +56,9 @@
                 rows="5"
             ></textarea>
         </div>
-        <button
-            type="submit"
-            class="button-primary w-full hover-scale transition-all duration-300"
-        >
-            Submit
+        <button type="submit" 
+                class="button-primary w-full text-lg hover-scale transition-all duration-300">
+            Submit Feedback
         </button>
     </form>
 </div>
