@@ -1,11 +1,13 @@
 {% extends "base.html" %} {% block content %}
-<div class="container mx-auto p-4">
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Thank You!</h2>
-    <p class="text-gray-600 dark:text-gray-300">
+<div class="container mx-auto p-8 text-center fade-in" style="animation-delay: 0.1s">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4 slide-in">
+        Thank You!
+    </h2>
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 fade-in" style="animation-delay: 0.2s">
         Your feedback has been submitted successfully.
     </p>
-    <a href="{{ url_for('index') }}" class="text-blue-500 dark:text-blue-300"
-        >Submit another review</a
-    >
+    <a href="{{ url_for('index') }}" class="button-primary">
+        Submit Another Review
+    </a>
 </div>
 {% endblock %}

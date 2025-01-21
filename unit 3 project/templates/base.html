@@ -20,28 +20,76 @@
                 transform: translateY(0);
                 transition: all 0.5s ease;
             }
+            .fade-in {
+                animation: fadeIn 1s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+
+            .slide-in {
+                animation: slideIn 0.5s ease-out;
+            }
+
+            @keyframes slideIn {
+                from {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            .hover-scale {
+                transition: transform 0.2s ease;
+            }
+
+            .hover-scale:hover {
+                transform: scale(1.05);
+            }
+
+            .card {
+                @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6;
+            }
+
+            .button-primary {
+                @apply bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition;
+            }
+
+            .button-secondary {
+                @apply bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition;
+            }
         </style>
     </head>
     <body
         class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300"
     >
-    <nav class="bg-gray-800 p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-white font-bold text-xl">Anonymous Teacher Feedback</a>
-            <div class="space-x-4">
-                <a href="/" class="text-white hover:text-gray-300">Home</a>
-                <a href="{{ url_for('view_reviews') }}" class="text-white hover:text-gray-300">View All Teacher Feedback</a>
-                <a href="{{ url_for('about') }}" class="text-white hover:text-gray-300">About</a>
+        <nav class="bg-gray-800 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/" class="text-white font-bold text-xl">Anonymous Teacher Feedback</a>
+                <div class="space-x-4">
+                    <a href="/" class="text-white hover:text-gray-300">Home</a>
+                    <a href="{{ url_for('view_reviews') }}" class="text-white hover:text-gray-300">View All Teacher Feedback</a>
+                    <a href="{{ url_for('about') }}" class="text-white hover:text-gray-300">About</a>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
         <nav class="p-4 bg-gray-100 dark:bg-gray-800">
             <div class="container mx-auto flex justify-between items-center">
                 
-                
-                </button>
             </div>
         </nav>
         {% block content %}{% endblock %}
+        
+        <!-- Include scripts.js here to ensure it's loaded after the content -->
+        <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     </body>
 </html>

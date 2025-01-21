@@ -2,18 +2,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto p-4">
-    <h2 class="text-xl font-bold text-gray-800 dark:text-white">View Reviews</h2>
-    <form method="post" class="space-y-4">
+<div class="container mx-auto p-8">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 fade-in">
+        View Reviews
+    </h2>
+    <form method="post" class="space-y-6 card fade-in" style="animation-delay: 0.2s">
         <div>
             <label for="teacher" class="block text-gray-700 dark:text-gray-300">Choose a teacher:</label>
-            <select name="teacher" id="teacherSelect" required class="w-full p-2 border border-gray-300 rounded-md mt-2">
+            <select name="teacher" id="teacherSelect" required class="w-full p-3 border border-gray-300 rounded-md mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500 slide-in">
                 {% for teacher in teachers %}
                     <option value="{{ teacher }}">{{ teacher }}</option>
                 {% endfor %}
             </select>
         </div>
-        <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded-md">
+        <button type="submit" class="button-primary w-full hover-scale transition-all duration-300">
             View Reviews
         </button>
     </form>

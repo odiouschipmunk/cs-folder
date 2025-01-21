@@ -1,27 +1,17 @@
-
 {% extends "base.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Teacher Feedback</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <main class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold mb-6">About Teacher Feedback</h1>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="mb-4">
-                Allows for students to provide anonymous feedback to their teachers.
-            </p>
-            <p class="mb-4">
-                Created as part of a project for Advanced Computing
-            </p>
-        </div>
-    </main>
-</body>
-</html>
+<div class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold mb-6 text-gray-800 dark:text-white fade-in slide-in">
+        About Teacher Feedback
+    </h1>
+    <div class="card fade-in" style="animation-delay: 0.2s">
+        <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Our platform allows students to provide anonymous feedback to their teachers, fostering an environment of continuous improvement and open communication.
+        </p>
+        <p class="mb-4 text-gray-700 dark:text-gray-300">
+            This project was created as part of an Advanced Computing course, aiming to implement a secure and user-friendly feedback system.
+        </p>
+    </div>
+</div>
 {% endblock %}
