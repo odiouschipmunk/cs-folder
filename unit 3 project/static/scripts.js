@@ -82,8 +82,6 @@ viewFeedbackButton.addEventListener("click", function () {
   }
 });
 
-// Remove the existing Alpine.js theme component code since it's now in base.html
-
 // Keep the event listener for system theme changes
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (localStorage.getItem('darkMode') === null) {
