@@ -82,50 +82,11 @@ viewFeedbackButton.addEventListener("click", function () {
   }
 });
 
-// Initialize Alpine.js theme component with improved functionality
-document.addEventListener('alpine:init', () => {
-    Alpine.data('theme', () => ({
-        darkMode: localStorage.getItem('darkMode') === 'true',
-        init() {
-            // Set initial theme based on system preference if no stored preference
-            if (localStorage.getItem('darkMode') === null) {
-                this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                localStorage.setItem('darkMode', this.darkMode);
-            }
-            
-            // Apply theme immediately
-            if (this.darkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        },
-        toggleTheme() {
-            this.darkMode = !this.darkMode;
-            localStorage.setItem('darkMode', this.darkMode);
-            
-            if (this.darkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        }
-    }));
-});
+// Remove the existing Alpine.js theme component code since it's now in base.html
 
-// Remove x-cloak after Alpine initializes
-window.addEventListener('alpine:init', () => {
-    document.querySelectorAll('[x-cloak]').forEach(el => {
-        el.removeAttribute('x-cloak');
-    });
-});
-
-// Watch for system theme changes
+// Keep the event listener for system theme changes
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (localStorage.getItem('darkMode') === null) {
-        const theme = Alpine.store('theme');
-        if (theme) {
-            theme.darkMode = e.matches;
-        }
+        document.documentElement.classList.toggle('dark', e.matches);
     }
 });
