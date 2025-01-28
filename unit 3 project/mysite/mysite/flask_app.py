@@ -14,7 +14,7 @@ def index():
         message = request.form["message"]
         message = profanity.censor(message)
         Functions.write_review([message, teacher, course])
-        return redirect(url_for("thanks"))
+        return redirect(url_for("thanks", teacher=teacher))
     return render_template("index.html", teachers=teachers)
 
 
@@ -26,8 +26,8 @@ def get_teachers_route():
 
 @app.route("/thanks")
 def thanks():
-    
-    return render_template("thanks.html")
+    teacher = request.args.get('teacher')
+    return render_template("thanks.html", teacher=teacher)
 
 @app.route("/feedback", methods=["GET"])
 def feedback():

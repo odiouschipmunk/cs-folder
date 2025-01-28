@@ -6,8 +6,20 @@
     <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 fade-in" style="animation-delay: 0.2s">
         Your feedback has been submitted successfully.
     </p>
-    <a href="{{ url_for('index') }}" class="button-primary">
-        Submit Another Review
-    </a>
+    <div class="space-y-4">
+        {% if teacher %}
+        <a href="{{ url_for('view_reviews') }}" 
+           onclick="event.preventDefault(); document.getElementById('viewReviewsForm').submit();" 
+           class="button-secondary block mx-auto w-fit hover-scale">
+            View All Reviews for {{ teacher }}
+        </a>
+        <form id="viewReviewsForm" action="{{ url_for('view_reviews') }}" method="post" class="hidden">
+            <input type="hidden" name="teacher" value="{{ teacher }}">
+        </form>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="button-primary block mx-auto w-fit hover-scale">
+            Submit Another Review
+        </a>
+    </div>
 </div>
 {% endblock %}
