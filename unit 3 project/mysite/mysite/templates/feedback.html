@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mx-auto p-8">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 slide-in">
+        Feedback for {{ teacher }} - {{ course }}
+    </h2>
+    {% if reviews %}
+    <ul class="space-y-6 fade-in" style="animation-delay: 0.3s">
+        {% for review in reviews %}
+        <li class="card slide-in">
+            <p class="text-gray-700 dark:text-gray-300">
+                "{{ review['review'] }}"
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-gray-600 dark:text-gray-300 fade-in">
+        No feedback available for this teacher and course.
+    </p>
+    {% endif %}
+    <a
+        href="{{ url_for('index') }}"
+        class="button-primary mt-6 inline-block hover-scale transition-all duration-300"
+    >Back to Home</a>
+</div>
+{% endblock %}

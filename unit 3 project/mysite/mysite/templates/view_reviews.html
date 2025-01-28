@@ -1,0 +1,28 @@
+<!-- templates/view_reviews.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto p-8">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 fade-in">
+        Reviews for {{ teacher }}
+    </h2>
+    {% if reviews %}
+        <ul class="space-y-6 fade-in" style="animation-delay: 0.3s">
+            {% for review in reviews %}
+                <li class="card slide-in">
+                    <p class="text-gray-700 dark:text-gray-300 mb-2">
+                        "{{ review['review'] }}"
+                    </p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Class: {{ review['class'] }}
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-gray-600 dark:text-gray-300 fade-in">
+            No reviews available for this teacher.
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
