@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import Functions
 from better_profanity import profanity
+from transformers import pipeline
+import numpy as np
 
 app = Flask(__name__)
 
@@ -13,6 +15,9 @@ def index():
         course = request.form["course"]
         message = request.form["message"]
         message = profanity.censor(message)
+        #truncate the message to only 50k chars
+        message = message[:50000]
+        print(generate_rating(message))
         Functions.write_review([message, teacher, course])
         return redirect(url_for("thanks", teacher=teacher))
     return render_template("index.html", teachers=teachers)
@@ -23,6 +28,19 @@ def get_teachers_route():
     teachers = Functions.get_teachers()
     return jsonify(teachers)
 
+def generate_rating(message):
+    sentiment_pipeline = pipeline("sentiment-analysis")
+    result = sentiment_pipeline(message)
+    rating=[result[0]['label'], result[0]['score']]
+    #generate a numerical rating from 1-5
+    num=0
+    if rating[0]=='POSITIVE':
+        num=rating[1]
+    if rating[0]=='NEGATIVE':
+        num=-rating[1]
+    
+    num = 4 * (1 / (1 + np.exp(-num)))
+    return int(num)
 
 @app.route("/thanks")
 def thanks():
