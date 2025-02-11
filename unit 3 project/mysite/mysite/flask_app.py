@@ -17,7 +17,7 @@ def index():
         message = profanity.censor(message)
         #truncate the message to only 50k chars
         message = message[:50000]
-        print(generate_rating(message))
+        #print(generate_rating(message))
         Functions.write_review([message, teacher, course])
         return redirect(url_for("thanks", teacher=teacher))
     return render_template("index.html", teachers=teachers)
