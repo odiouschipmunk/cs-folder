@@ -14,7 +14,8 @@ from flask_login import (
 )
 from oauthlib.oauth2 import WebApplicationClient
 import requests
-
+from dotenv import load_dotenv
+load_dotenv()
 # Internal imports
 from db import init_db_command
 from user import User
@@ -144,4 +145,4 @@ def logout():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    app.run(ssl_context="adhoc", port=5000)
+    app.run(port=5000)
