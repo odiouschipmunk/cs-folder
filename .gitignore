@@ -1,2 +1,4 @@
 .venv
 venv
+google auth/.env
+*.env*
