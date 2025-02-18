@@ -2,3 +2,4 @@
 venv
 google auth/.env
 *.env*
+unit 3 project/mysite/mysite/client_secret.json
